@@ -218,7 +218,6 @@ public class EditorEventProcessor extends AbstractEventProcessor {
               AbstractPetriNetElementModel.SUBP_TYPE, -1, editor.getLastMousePosition(), false);
           break;
         case AbstractViewEvent.ADD_SUBPLACE:
-          System.out.println(22222222);
           GraphCell startPlace =
               editor.createElement(
                   AbstractPetriNetElementModel.PLACE_TYPE,

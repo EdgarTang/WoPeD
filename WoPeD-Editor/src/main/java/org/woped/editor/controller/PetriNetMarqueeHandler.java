@@ -45,6 +45,7 @@ import org.woped.core.model.ArcModel;
 import org.woped.core.model.CreationMap;
 import org.woped.core.model.petrinet.*;
 import org.woped.editor.action.EditorViewEvent;
+import org.woped.editor.controller.vc.EditorVC;
 import org.woped.editor.gui.PopupMenuPetrinet;
 import org.woped.editor.utilities.Cursors;
 
@@ -161,6 +162,18 @@ public class PetriNetMarqueeHandler extends AbstractMarqueeHandler {
     // Undo setting of minimum preferred size during mouse dragging
     getGraph().setMinPreferredWidth(0);
     getGraph().setMinPreferredHeight(0);
+
+    IEditor editor = getEditor();
+    EditorVC editorVC = null;
+
+    Object[] selections = null;
+    if (getEditor().getCreateElementType() == AbstractPetriNetElementModel.SUBPLACE_TYPE) {
+      if (editor instanceof EditorVC) {
+        editorVC = (EditorVC) editor;
+        selections = editorVC.getGraph().getSelectionCells();
+        editorVC.copySelection();
+      }
+    }
     getEditor().setLastMousePosition(e.getPoint());
 
     if (getEditor().isDrawingMode()
@@ -179,36 +192,45 @@ public class PetriNetMarqueeHandler extends AbstractMarqueeHandler {
         map.setOperatorType(getEditor().getCreateElementType());
         getEditor().create(map, true);
       } else if (getEditor().getCreateElementType() == AbstractPetriNetElementModel.SUBPLACE_TYPE) {
-        System.out.println(111111);
         CreationMap m1 = CreationMap.createMap();
         m1.setPosition(
             (int) (getEditor().getLastMousePosition().getX() - 100),
             (int) (getEditor().getLastMousePosition().getY()));
         m1.setType(AbstractPetriNetElementModel.PLACE_TYPE);
-        GraphCell startPlace = getEditor().create(m1, true);
+        GroupModel startPlace = (GroupModel) getEditor().create(m1, true);
         CreationMap m2 = CreationMap.createMap();
         m2.setPosition(
             (int) (getEditor().getLastMousePosition().getX()),
             (int) (getEditor().getLastMousePosition().getY()));
         m2.setType(AbstractPetriNetElementModel.SUBP_TYPE);
-        GraphCell subprocess = getEditor().create(m2, true);
+        GroupModel subprocess = (GroupModel) getEditor().create(m2, true);
 
         CreationMap m3 = CreationMap.createMap();
         m3.setPosition(
             (int) (getEditor().getLastMousePosition().getX() + 100),
             (int) (getEditor().getLastMousePosition().getY()));
         m3.setType(AbstractPetriNetElementModel.PLACE_TYPE);
-        GraphCell endPlace = getEditor().create(m3, true);
+        GroupModel endPlace = (GroupModel) getEditor().create(m3, true);
 
         CreationMap m4 = CreationMap.createMap();
-        m4.setArcSourceId(((GroupModel) startPlace).getMainElement().getId());
-        m4.setArcTargetId(((GroupModel) subprocess).getMainElement().getId());
+        m4.setArcSourceId(startPlace.getMainElement().getId());
+        m4.setArcTargetId(subprocess.getMainElement().getId());
         getEditor().create(m4, true);
 
         CreationMap m5 = CreationMap.createMap();
-        m5.setArcSourceId(((GroupModel) subprocess).getMainElement().getId());
-        m5.setArcTargetId(((GroupModel) endPlace).getMainElement().getId());
+        m5.setArcSourceId(subprocess.getMainElement().getId());
+        m5.setArcTargetId(endPlace.getMainElement().getId());
         getEditor().create(m5, true);
+
+        SubProcessModel model = (SubProcessModel) subprocess.getMainElement();
+
+        IEditor subEditor = mediator.createSubprocessEditor(true, getEditor(), model);
+        EditorVC subEditorVC = (EditorVC) subEditor;
+
+        editor.getGraph().setSelectionCells(selections);
+        editorVC.deleteSelection();
+
+        subEditorVC.paste();
       } else {
         map.setType(getEditor().getCreateElementType());
         getEditor().create(map, true);

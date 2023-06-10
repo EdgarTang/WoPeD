@@ -113,6 +113,13 @@ public class ApplicationEventProcessor extends AbstractEventProcessor {
           currentEditor.setDrawMode(-1, false);
         }
         break;
+      case AbstractViewEvent.DRAWMODE_SUBPLACE:
+        if (currentEditor.getCreateElementType() != AbstractPetriNetElementModel.SUBPLACE_TYPE) {
+          currentEditor.setDrawMode(AbstractPetriNetElementModel.SUBPLACE_TYPE, true);
+        } else {
+          currentEditor.setDrawMode(-1, false);
+        }
+        break;
 
       case AbstractViewEvent.CONFIG:
         ConfigVC config = ((ConfigVC) getMediator().getViewController(ConfigVC.ID_PREFIX));

@@ -202,6 +202,7 @@ public abstract class AbstractViewEvent extends ActionEvent {
   public static final int DRAWMODE_XORSPLIT = 1024;
   public static final int DRAWMODE_XORJOIN = 1025;
   public static final int DRAWMODE_SUB = 1026;
+  public static final int DRAWMODE_SUBPLACE = 1104;
   public static final int DRAWMODE_XORSPLITJOIN = 1027;
   public static final int CHECK_SELECTION = 1028;
   public static final int ARC_SELECTED = 1029;
@@ -278,6 +279,7 @@ public abstract class AbstractViewEvent extends ActionEvent {
   public static final int T2P = 1103;
   public static final int INCREASE_ARC_WEIGHT = 1101;
   public static final int DECREASE_ARC_WEIGHT = 1102;
+  public static final int ADD_SUBPLACE = 1105;
 
   // Keys for coverability graph events are in the range from 10.000 to 10.100;
   // The can be found at CoverabilityGraphViewEvents in the coverability graph module

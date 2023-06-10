@@ -30,6 +30,8 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
+
+import org.eclipse.swt.internal.C;
 import org.jgraph.graph.BasicMarqueeHandler;
 import org.jgraph.graph.DefaultPort;
 import org.jgraph.graph.GraphCell;
@@ -43,12 +45,9 @@ import org.woped.core.controller.IEditor;
 import org.woped.core.controller.ViewEvent;
 import org.woped.core.model.ArcModel;
 import org.woped.core.model.CreationMap;
-import org.woped.core.model.petrinet.AbstractPetriNetElementModel;
-import org.woped.core.model.petrinet.GroupModel;
-import org.woped.core.model.petrinet.NameModel;
-import org.woped.core.model.petrinet.PlaceModel;
-import org.woped.core.model.petrinet.SubProcessModel;
-import org.woped.core.model.petrinet.TransitionModel;
+import org.woped.core.model.ModelElementContainer;
+import org.woped.core.model.PetriNetModelProcessor;
+import org.woped.core.model.petrinet.*;
 import org.woped.editor.action.EditorViewEvent;
 import org.woped.editor.gui.PopupMenuPetrinet;
 import org.woped.editor.utilities.Cursors;
@@ -183,6 +182,35 @@ public class PetriNetMarqueeHandler extends AbstractMarqueeHandler {
         map.setType(AbstractPetriNetElementModel.TRANS_OPERATOR_TYPE);
         map.setOperatorType(getEditor().getCreateElementType());
         getEditor().create(map, true);
+      } else if (getEditor().getCreateElementType() == AbstractPetriNetElementModel.SUBPLACE_TYPE) {
+        System.out.println(111111);
+        CreationMap m1 = CreationMap.createMap();
+        m1.setPosition(100, 100);
+        m1.setType(AbstractPetriNetElementModel.PLACE_TYPE);
+        //        GraphCell startPlace = getEditor().create(m1, true);
+
+        CreationMap m2 = CreationMap.createMap();
+        m2.setPosition(200, 100);
+        m2.setType(AbstractPetriNetElementModel.SUBP_TYPE);
+        //        GraphCell subprocess = getEditor().create(m2, true);
+
+        CreationMap m3 = CreationMap.createMap();
+        m3.setPosition(300, 100);
+        m3.setType(AbstractPetriNetElementModel.PLACE_TYPE);
+        //        GraphCell endPlace = getEditor().create(m3, true);
+
+//        CreationMap creationMap = new CreationMap();
+//        ModelElementContainer newContainer = new ModelElementContainer();
+//
+//        newContainer.setOwningElement(creationMap.getSubElementContainer().getOwningElement());
+//
+//        PetriNetModelProcessor processor = new PetriNetModelProcessor();
+//        processor.setElementContainer(newContainer);
+//        processor.createElement(m1);
+//        processor.createElement(m2);
+//        processor.createElement(m3);
+
+
       } else {
         map.setType(getEditor().getCreateElementType());
         getEditor().create(map, true);

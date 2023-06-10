@@ -80,6 +80,13 @@ public class Cursors {
               subProcessIcon.getImage(),
               new Point(subProcessIcon.getIconWidth() / 2, subProcessIcon.getIconHeight() / 2),
               "Cursor");
+  private static ImageIcon subPlaceIcon = Messages.getCursorImageIcon("ToolBar.DrawSubPlace");
+  public static Cursor subPlaceCursor =
+      Toolkit.getDefaultToolkit()
+          .createCustomCursor(
+              subPlaceIcon.getImage(),
+              new Point(subPlaceIcon.getIconWidth() / 2, subPlaceIcon.getIconHeight() / 2),
+              "Cursor");
   private static ImageIcon andJoinXorSplitIcon =
       Messages.getCursorImageIcon("ToolBar.DrawAndJoinXorSplit");
   public static Cursor andJoinXorSplitCursor =
@@ -123,6 +130,8 @@ public class Cursors {
         return transitionCursor;
       case OperatorTransitionModel.SUBP_TYPE:
         return subProcessCursor;
+      case AbstractPetriNetElementModel.SUBPLACE_TYPE:
+        return subPlaceCursor;
       default:
         return Cursor.getPredefinedCursor(Cursor.CUSTOM_CURSOR);
     }

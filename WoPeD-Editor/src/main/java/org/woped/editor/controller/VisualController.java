@@ -98,6 +98,7 @@ public class VisualController
   public static final int GROUP_SELECTION = 22;
   // Drawmode
   public static final int DRAWMODE_PLACE = 23;
+  public static final int DRAWMODE_SUBPLACE = 61;
   public static final int DRAWMODE_TRANSITION = 24;
   public static final int DRAWMODE_AND_SPLIT = 25;
   public static final int DRAWMODE_AND_JOIN = 26;
@@ -144,7 +145,7 @@ public class VisualController
   public static final int T2P = 59;
   public static final int CAN_DECREASE_ARC_WEIGHT = 60;
 
-  private static final int MAX_ID = 61;
+  private static final int MAX_ID = 62;
   private static VisualController instance = null;
   private AbstractApplicationMediator am = null;
   private boolean active = true;
@@ -575,6 +576,7 @@ public class VisualController
     boolean xorJoinAndSplit = false;
     boolean orSplit = false;
     boolean subprocess = false;
+    boolean subplace = false;
 
     if (am.getUi().getEditorFocus() != null) {
 
@@ -615,6 +617,9 @@ public class VisualController
         case (OperatorTransitionModel.SUBP_TYPE):
           subprocess = true;
           break;
+        case (OperatorTransitionModel.SUBPLACE_TYPE):
+          subplace = true;
+          break;
       }
     }
 
@@ -630,6 +635,7 @@ public class VisualController
     setStatus(DRAWMODE_XORJOIN_ANDSPLIT, xorJoinAndSplit);
     setStatus(DRAWMODE_OR_SPLIT, orSplit);
     setStatus(DRAWMODE_SUBPROCESS, subprocess);
+    setStatus(DRAWMODE_SUBPLACE, subplace);
   }
 
   protected void checkAproMoRe() {

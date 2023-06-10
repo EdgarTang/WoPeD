@@ -83,6 +83,7 @@ public class PopupMenuPetrinet extends JPopupMenu {
   private JMenuItem m_addAndJoinXorSplitMenuItem = null;
   private JMenuItem m_addXorJoinAndSplitMenuItem = null;
   private JMenuItem m_addSubprocessMenuItem = null;
+  private JMenuItem m_addSubplaceMenuItem = null;
   private JMenuItem m_rotateRightMenuItem = null;
   private JMenuItem m_rotateLeftMenuItem = null;
   private JMenuItem m_groupMenuItem = null;
@@ -104,6 +105,7 @@ public class PopupMenuPetrinet extends JPopupMenu {
     add(getAddAndJoinXorSplitMenuItem());
     add(getAddXorJoinAndSplitMenuItem());
     add(getAddSubprocessMenuItem());
+    add(getAddSubplaceMenuItem());
     add(getPropertiesMenuItem());
     add(getRenameMenuItem());
     add(getRemoveMenuItem());
@@ -394,6 +396,16 @@ public class PopupMenuPetrinet extends JPopupMenu {
       ActionFactory.addTarget(c_mediator, action_id, m_addSubprocessMenuItem);
     }
     return m_addSubprocessMenuItem;
+  }
+
+  private JMenuItem getAddSubplaceMenuItem() {
+    if (m_addSubplaceMenuItem == null) {
+      action_id = ActionFactory.ACTIONID_ADD_SUBPLACE;
+      action = ActionFactory.getStaticAction(action_id);
+      m_addSubplaceMenuItem = new JMenuItem(action);
+      ActionFactory.addTarget(c_mediator, action_id, m_addSubplaceMenuItem);
+    }
+    return m_addSubplaceMenuItem;
   }
 
   private JMenuItem getPasteMenuItem() {

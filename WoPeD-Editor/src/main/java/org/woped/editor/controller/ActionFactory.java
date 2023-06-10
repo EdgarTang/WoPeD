@@ -75,6 +75,7 @@ public class ActionFactory {
   public static final String ACTIONID_DRAWMODE_ANDJOINXORSPLIT = "ToolBar.DrawAndJoinXorSplit";
   public static final String ACTIONID_DRAWMODE_XORJOINANDSPLIT = "ToolBar.DrawXorJoinAndSplit";
   public static final String ACTIONID_DRAWMODE_SUB = "ToolBar.DrawSubProcess";
+  public static final String ACTIONID_DRAWMODE_SUBPLACE = "ToolBar.DrawSubPlace";
   public static final String ACTIONID_REDO = "Action.Redo";
 
   public static final String ACTIONID_UNDO = "Action.Undo";
@@ -113,6 +114,7 @@ public class ActionFactory {
   public static final String ACTIONID_ADD_XORJOIN = "Popup.Add.XorJoin";
   public static final String ACTIONID_ADD_XORSPLIT = "Popup.Add.XorSplit";
   public static final String ACTIONID_ADD_SUBPROCESS = "Popup.Add.Subprocess";
+  public static final String ACTIONID_ADD_SUBPLACE = "Popup.Add.Subplace";
   public static final String ACTIONID_ADD_ANDJOINXORSPLIT = "Popup.Add.AndJoinXorSplit";
   public static final String ACTIONID_ADD_XORJOINANDSPLIT = "Popup.Add.XorJoinAndSplit";
 
@@ -401,6 +403,21 @@ public class ActionFactory {
             VisualController.WITH_EDITOR,
             VisualController.WITH_EDITOR,
             VisualController.DRAWMODE_PLACE);
+
+    STATIC_ACTION_MAP.put(
+        ACTIONID_DRAWMODE_SUBPLACE,
+        new WoPeDAction(
+            am,
+            AbstractViewEvent.VIEWEVENTTYPE_APPLICATION,
+            AbstractViewEvent.DRAWMODE_SUBPLACE,
+            null,
+            ACTIONID_DRAWMODE_SUBPLACE));
+    VisualController.getInstance()
+        .addElement(
+            STATIC_ACTION_MAP.get(ACTIONID_DRAWMODE_SUBPLACE),
+            VisualController.WITH_EDITOR,
+            VisualController.WITH_EDITOR,
+            VisualController.DRAWMODE_SUBPLACE);
 
     STATIC_ACTION_MAP.put(
         ACTIONID_DRAWMODE_TRANSITION,
@@ -1494,6 +1511,21 @@ public class ActionFactory {
             STATIC_ACTION_MAP.get(ACTIONID_OPEN_SUBPROCESS),
             VisualController.SUBPROCESS_SELECTION,
             VisualController.SUBPROCESS_SELECTION,
+            VisualController.IGNORE);
+
+    STATIC_ACTION_MAP.put(
+        ACTIONID_ADD_SUBPLACE,
+        new WoPeDAction(
+            am,
+            AbstractViewEvent.VIEWEVENTTYPE_EDIT,
+            AbstractViewEvent.ADD_SUBPLACE,
+            null,
+            ACTIONID_ADD_SUBPLACE));
+    VisualController.getInstance()
+        .addElement(
+            STATIC_ACTION_MAP.get(ACTIONID_ADD_SUBPLACE),
+            VisualController.NO_SELECTION,
+            VisualController.NO_SELECTION,
             VisualController.IGNORE);
 
     STATIC_ACTION_MAP.put(

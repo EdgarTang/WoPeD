@@ -43,6 +43,7 @@ public abstract class AbstractPetriNetElementModel extends DefaultGraphCell
   public static final int GROUP_TYPE = 7;
   public static final int RESOURCE_TYPE = 8;
   public static final int SIMULATION_TYPE = 9;
+  public static final int SUBPLACE_TYPE = 10;
   // ! Default color to be used for understandability (Color for not highlighted elements)
   protected static final Color defaultUnderstandabilityColor = Color.white;
   /** */

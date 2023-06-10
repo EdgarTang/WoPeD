@@ -14,6 +14,7 @@ public class NetInfoTreeRenderer extends DefaultTreeCellRenderer {
   Icon place = null;
   Icon transition = null;
   Icon subprocess = null;
+  Icon subplace = null;
   Icon xorSplit = null;
   Icon xorJoin = null;
   Icon andSplit = null;
@@ -27,6 +28,7 @@ public class NetInfoTreeRenderer extends DefaultTreeCellRenderer {
     place = Messages.getImageIcon("Popup.Add.Place");
     transition = Messages.getImageIcon("Popup.Add.Transition");
     subprocess = Messages.getImageIcon("Popup.Add.Subprocess");
+    //    subplace = Messages.getImageIcon("Popup.Add.Subplace");
     xorSplit = Messages.getImageIcon("Popup.Add.XorSplit");
     xorJoin = Messages.getImageIcon("Popup.Add.XorJoin");
     andSplit = Messages.getImageIcon("Popup.Add.AndSplit");
@@ -72,6 +74,9 @@ public class NetInfoTreeRenderer extends DefaultTreeCellRenderer {
           case AbstractPetriNetElementModel.SUBP_TYPE:
             result = subprocess;
             break;
+            //          case AbstractPetriNetElementModel.SUBPLACE_TYPE:
+            //            result = subplace;
+            //            break;
           case OperatorTransitionModel.AND_JOIN_TYPE:
             result = andJoin;
             break;

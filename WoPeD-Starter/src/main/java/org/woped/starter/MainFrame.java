@@ -121,6 +121,7 @@ public class MainFrame extends JRibbonFrame implements IUserInterface {
   private JCommandButton xorJoinAndSplitButton = null;
   private JCommandButton andSplitJoinButton = null;
   private JCommandButton subprocessButton = null;
+  private JCommandButton subplaceButton = null;
 
   private JCommandButton changeOrientationButton = null;
   private JCommandButton optimizeLayoutButton = null;
@@ -1129,6 +1130,7 @@ public class MainFrame extends JRibbonFrame implements IUserInterface {
       formsBand.addCommandButton(getAndJoinXorSplitButton(), RibbonElementPriority.MEDIUM);
       formsBand.addCommandButton(getXorJoinAndSplitButton(), RibbonElementPriority.MEDIUM);
       formsBand.addCommandButton(getSubprocessButton(), RibbonElementPriority.MEDIUM);
+      formsBand.addCommandButton(getSubPlaceButton(), RibbonElementPriority.MEDIUM);
     }
 
     return formsBand;
@@ -1632,6 +1634,25 @@ public class MainFrame extends JRibbonFrame implements IUserInterface {
     }
 
     return placeButton;
+  }
+
+  private JCommandButton getSubPlaceButton() {
+
+    if (subplaceButton == null) {
+      subplaceButton =
+          new JCommandButton(Messages.getString("Forms.subplace.text"), new forms_place());
+      subplaceButton.addActionListener(
+          new ActionButtonListener(
+              m_mediator,
+              ActionFactory.ACTIONID_DRAWMODE_SUBPLACE,
+              AbstractViewEvent.DRAWMODE_SUBPLACE,
+              subplaceButton));
+      addShortcutToMouseButton(
+          "Forms.subplace", subplaceButton, ActionFactory.ACTIONID_DRAWMODE_SUBPLACE, false);
+      setTooltip(subplaceButton, "Forms.subplace", true);
+    }
+
+    return subplaceButton;
   }
 
   private JCommandButton getTransitionButton() {

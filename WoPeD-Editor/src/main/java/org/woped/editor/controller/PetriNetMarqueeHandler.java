@@ -185,32 +185,34 @@ public class PetriNetMarqueeHandler extends AbstractMarqueeHandler {
       } else if (getEditor().getCreateElementType() == AbstractPetriNetElementModel.SUBPLACE_TYPE) {
         System.out.println(111111);
         CreationMap m1 = CreationMap.createMap();
-        m1.setPosition(100, 100);
+        m1.setPosition(
+            (int) (getEditor().getLastMousePosition().getX() - 100),
+            (int) (getEditor().getLastMousePosition().getY()));
         m1.setType(AbstractPetriNetElementModel.PLACE_TYPE);
-        //        GraphCell startPlace = getEditor().create(m1, true);
-
+        GraphCell startPlace = getEditor().create(m1, true);
         CreationMap m2 = CreationMap.createMap();
-        m2.setPosition(200, 100);
+        m2.setPosition(
+            (int) (getEditor().getLastMousePosition().getX()),
+            (int) (getEditor().getLastMousePosition().getY()));
         m2.setType(AbstractPetriNetElementModel.SUBP_TYPE);
-        //        GraphCell subprocess = getEditor().create(m2, true);
+        GraphCell subprocess = getEditor().create(m2, true);
 
         CreationMap m3 = CreationMap.createMap();
-        m3.setPosition(300, 100);
+        m3.setPosition(
+            (int) (getEditor().getLastMousePosition().getX() + 100),
+            (int) (getEditor().getLastMousePosition().getY()));
         m3.setType(AbstractPetriNetElementModel.PLACE_TYPE);
-        //        GraphCell endPlace = getEditor().create(m3, true);
+        GraphCell endPlace = getEditor().create(m3, true);
 
-//        CreationMap creationMap = new CreationMap();
-//        ModelElementContainer newContainer = new ModelElementContainer();
-//
-//        newContainer.setOwningElement(creationMap.getSubElementContainer().getOwningElement());
-//
-//        PetriNetModelProcessor processor = new PetriNetModelProcessor();
-//        processor.setElementContainer(newContainer);
-//        processor.createElement(m1);
-//        processor.createElement(m2);
-//        processor.createElement(m3);
+        CreationMap m4 = CreationMap.createMap();
+        m4.setArcSourceId(((GroupModel) startPlace).getMainElement().getId());
+        m4.setArcTargetId(((GroupModel) subprocess).getMainElement().getId());
+        getEditor().create(m4, true);
 
-
+        CreationMap m5 = CreationMap.createMap();
+        m5.setArcSourceId(((GroupModel) subprocess).getMainElement().getId());
+        m5.setArcTargetId(((GroupModel) endPlace).getMainElement().getId());
+        getEditor().create(m5, true);
       } else {
         map.setType(getEditor().getCreateElementType());
         getEditor().create(map, true);

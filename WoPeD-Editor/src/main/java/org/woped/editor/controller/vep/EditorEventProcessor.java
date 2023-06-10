@@ -4,6 +4,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.Iterator;
 import javax.swing.JFrame;
+import org.jgraph.graph.GraphCell;
 import org.woped.core.controller.AbstractApplicationMediator;
 import org.woped.core.controller.AbstractEventProcessor;
 import org.woped.core.controller.AbstractViewEvent;
@@ -215,6 +216,37 @@ public class EditorEventProcessor extends AbstractEventProcessor {
         case AbstractViewEvent.ADD_SUBPROCESS:
           editor.createElement(
               AbstractPetriNetElementModel.SUBP_TYPE, -1, editor.getLastMousePosition(), false);
+          break;
+        case AbstractViewEvent.ADD_SUBPLACE:
+          System.out.println(22222222);
+          GraphCell startPlace =
+              editor.createElement(
+                  AbstractPetriNetElementModel.PLACE_TYPE,
+                  -1,
+                  (int) (editor.getLastMousePosition().getX() - 100),
+                  (int) (editor.getLastMousePosition().getY()),
+                  false);
+          GraphCell subprocess =
+              editor.createElement(
+                  AbstractPetriNetElementModel.SUBP_TYPE,
+                  -1,
+                  (int) (editor.getLastMousePosition().getX()),
+                  (int) (editor.getLastMousePosition().getY()),
+                  false);
+          GraphCell endPlace =
+              editor.createElement(
+                  AbstractPetriNetElementModel.PLACE_TYPE,
+                  -1,
+                  (int) (editor.getLastMousePosition().getX() + 100),
+                  (int) (editor.getLastMousePosition().getY()),
+                  false);
+
+          editor.createArc(
+              ((GroupModel) startPlace).getMainElement().getId(),
+              ((GroupModel) subprocess).getMainElement().getId());
+          editor.createArc(
+              ((GroupModel) subprocess).getMainElement().getId(),
+              ((GroupModel) endPlace).getMainElement().getId());
           break;
         case AbstractViewEvent.ROUTING_ACTIVE:
           cell = editor.getGraph().getSelectionCell();

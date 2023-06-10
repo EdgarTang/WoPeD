@@ -30,8 +30,6 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
-
-import org.eclipse.swt.internal.C;
 import org.jgraph.graph.BasicMarqueeHandler;
 import org.jgraph.graph.DefaultPort;
 import org.jgraph.graph.GraphCell;
@@ -45,8 +43,6 @@ import org.woped.core.controller.IEditor;
 import org.woped.core.controller.ViewEvent;
 import org.woped.core.model.ArcModel;
 import org.woped.core.model.CreationMap;
-import org.woped.core.model.ModelElementContainer;
-import org.woped.core.model.PetriNetModelProcessor;
 import org.woped.core.model.petrinet.*;
 import org.woped.editor.action.EditorViewEvent;
 import org.woped.editor.gui.PopupMenuPetrinet;
